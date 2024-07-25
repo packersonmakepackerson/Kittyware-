@@ -9109,19 +9109,37 @@ task.spawn(function()
 	end
 end)
 
-runcode(function()
-Local Jadedisabler = {Enabled = false}
-Jadedisabler = GuiLibrary.ObjectsThatCanBeSaved.BlatantWindow.API.CreateOptionsButton({
-    Name = "Jade Disabler",
-    Function = function(callback)
-        if callback then
-          bedwars.AbilityController:useAbility("Jade_hammer_jump")
-         JadeTp.ToggleButton(false)
-          game.Players.LocalPlayers.Charecter.Humanoid.WalkSpeed = 50
-          wait(3)
-          game.Players.LocalPlayers.Charecter.Humanoid.WalkSpeed = 16
-        end
-      end,
-      HoverText = "5 sec disabler"
-    })
-end)                                                                                                                                                                                                                                                                                   
+AutoUpgradeEra = Utility.NewButton({
+	Name = "AutoUpgradeEra",
+	Function = function(callback)
+		if callback then
+			task.spawn(function()
+				repeat task.wait(0.2)
+                    local args = {
+                        [1] = {
+                            ["era"] = "iron_era"
+                        }
+                    }
+                    
+                    game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):WaitForChild("RequestPurchaseEra"):InvokeServer(unpack(args))
+
+                    local args = {
+                        [1] = {
+                            ["era"] = "diamond_era"
+                        }
+                    }
+                    
+                    game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):WaitForChild("RequestPurchaseEra"):InvokeServer(unpack(args))
+
+                    local args = {
+                        [1] = {
+                            ["era"] = "emerald_era"
+                        }
+                    }
+                    
+                    game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):WaitForChild("RequestPurchaseEra"):InvokeServer(unpack(args))
+				until (not AutoUpgradeEra.Enabled)
+			end)
+		end
+	end,
+})
