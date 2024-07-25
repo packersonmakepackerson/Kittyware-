@@ -9107,39 +9107,4 @@ task.spawn(function()
 	if not AutoLeave.Enabled then
 		AutoLeave.ToggleButton(false)
 	end
-end)
-
-AutoUpgradeEra = Utility.NewButton({
-	Name = "AutoUpgradeEra",
-	Function = function(callback)
-		if callback then
-			task.spawn(function()
-				repeat task.wait(0.2)
-                    local args = {
-                        [1] = {
-                            ["era"] = "iron_era"
-                        }
-                    }
-                    
-                    game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):WaitForChild("RequestPurchaseEra"):InvokeServer(unpack(args))
-
-                    local args = {
-                        [1] = {
-                            ["era"] = "diamond_era"
-                        }
-                    }
-                    
-                    game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):WaitForChild("RequestPurchaseEra"):InvokeServer(unpack(args))
-
-                    local args = {
-                        [1] = {
-                            ["era"] = "emerald_era"
-                        }
-                    }
-                    
-                    game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):WaitForChild("RequestPurchaseEra"):InvokeServer(unpack(args))
-				until (not AutoUpgradeEra.Enabled)
-			end)
-		end
-	end,
-})
+end)					
