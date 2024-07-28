@@ -9110,19 +9110,27 @@ task.spawn(function()
 end)					
 
 run(function()
-		InfiniteJump = GuiLibrary.ObjectsThatCanBeSaved.BlatantWindow.Api.CreateOptionsButton({Name="InfiniteJump",Function=function(callback)
-			if callback then
-			end
-		end});
-		game:GetService("UserInputService").JumpRequest:Connect(function()
-			if not InfiniteJump.Enabled then
-				return;
-			end
-			local localPlayer = game:GetService("Players").LocalPlayer;
-			local character = localPlayer.Character;
-			if (character and character:FindFirstChildOfClass("Humanoid")) then
-				local humanoid = character:FindFirstChildOfClass("Humanoid");
-				humanoid:ChangeState("Jumping");
-			end
-		end);
-	end);																																																																																																																								
+    local HannahExploit = {Enabled = false}
+    HannahExploit = GuiLibrary.ObjectsThatCanBeSaved.UtilityWindow.Api.CreateOptionsButton({
+        Name = "HannahTPAura",
+        Function = function(callback)
+            if callback then
+                RunLoops:BindToHeartbeat("hannah",function()
+                    for i,v in pairs(game.Players:GetChildren()) do
+                        local args = {
+                            [1] = {
+                                ["user"] = game:GetService("Players").LocalPlayer,
+                                ["victimEntity"] = v.Character
+                            }
+                        }
+    
+                        game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):WaitForChild("HannahPromptTrigger"):InvokeServer(unpack(args))
+                    end
+                end)
+            else
+                RunLoops:UnbindFromHeartbeat("hannah")
+            end
+        end,
+        HovorText = "Sometimes you will teleport across the map with Hannah"
+    })
+end)																																				
